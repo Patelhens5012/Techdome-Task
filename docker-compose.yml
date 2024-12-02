@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      CLOUD_NAME: techdome-cloud
+      API_KEY: PQnzAyxAM1V4PXYfheJmt2u59jz4Wy9nyrSjXnVrCnYUzP3OpVK3gBWN7SHf4D1p
+      API_SECRET: NedJgkjntANaM4foP7dYZgXgljr7P36zFdXzqV4aBI3b0b89HpJAgzYMEVbLnaWYbFI3GYcPaWc1hCW5o7MouA4pA4vFTM
+      DATABASE_URI: mongodb://mongo:27017/techdome-db
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
